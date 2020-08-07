@@ -1,0 +1,66 @@
+<fieldset id="filters" class="collapsible collapsed">
+  <div class="row-fluid">
+    <%= form_tag public_report_telephony_public_stat_index_path, method: :get do%>
+     <%= hidden_field_tag :telephony_category , 'queue' %>
+    <table>
+    <td>
+      <%= label(:date,:start,l(:date_start)) %>
+      <%= date_field(:range, :start, :value => @date_range.date_start, :size => 8) %>
+    </td>
+    <td>
+      <%= label(:date,:stop,l(:date_stop)) %>
+      <%= date_field(:range, :stop, :value => @date_range.date_stop, :size => 8) %>
+    </td>
+    <td>
+      <%= submit_tag 'Выбрать', class: 'btn' %>
+    </td>
+    </tr>
+    </table>
+    </form>
+    <% end %>
+  </div>
+</fieldset>
+
+<center>
+  <h3><%=l(:report_title)%>: <%= current_group_name %></h3>
+  <p><%=l(:report_range)%>: <%= @date_range.date_start %> - <%= @date_range.date_stop %>
+</center>
+
+<div class="autoscroll">
+  <table class="list stat-report issues">
+    <thead>
+      <tr>
+        <th><%=l(:label_users)%></th>
+        <th><%=l(:label_table_numbers)%></th>
+        <th>Оценка 1</th>
+        <th>Оценка 2</th>
+        <th>Оценка 3</th>
+        <th>Оценка 4</th>
+        <th>Оценка 5</th>
+      </tr>
+    </thead>
+
+    <tbody>
+  <% for user in @stat_users %>
+        <% temp = get_call_quality_by_user(@cached_calls, user) %>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td class="name"><%= link_to h(user.name), :action => "public_quality_detailed",
+          :dst => user.phone, :quality =>  "full_stat", :date_start => @date_range.date_start,
+          :date_stop => @date_range.date_stop %></td>
+          <td><%= user.phone %></td>
+          <td><%= link_to get_call_quality_by_user(@cached_calls, user)[0], :action => "public_quality_detailed", :dst => user.phone, :quality =>  1, :date_start => @date_range.date_start,
+             :date_stop => @date_range.date_stop %></td>
+          <td><%= link_to get_call_quality_by_user(@cached_calls, user)[1], :action => "public_quality_detailed", :dst => user.phone, :quality =>  2, :date_start => @date_range.date_start,
+             :date_stop => @date_range.date_stop %></td>
+          <td><%= link_to get_call_quality_by_user(@cached_calls, user)[2], :action => "public_quality_detailed", :dst => user.phone, :quality =>  3, :date_start => @date_range.date_start,
+             :date_stop => @date_range.date_stop %></td>
+          <td><%= link_to get_call_quality_by_user(@cached_calls, user)[3], :action => "public_quality_detailed", :dst => user.phone, :quality =>  4, :date_start => @date_range.date_start,
+             :date_stop => @date_range.date_stop %></td>
+          <td><%= link_to get_call_quality_by_user(@cached_calls, user)[4], :action => "public_quality_detailed", :dst => user.phone, :quality =>  5, :date_start => @date_range.date_start,
+             :date_stop => @date_range.date_stop %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% reset_cycle %>

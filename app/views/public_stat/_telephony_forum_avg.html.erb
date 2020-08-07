@@ -1,0 +1,58 @@
+<fieldset id="filters" class="collapsible collapsed">
+  <legend onclick="toggleFieldset(this);"><%= l(:label_filter_plural) %></legend>
+  <div class="row-fluid">
+    <%= form_tag public_report_telephony_public_stat_index_path, method: :get do%>
+     <%= hidden_field_tag :telephony_category , 'forum_avg' %>
+    <table>
+    <tr>
+    <td>
+      <%= label(:date,:start,l(:date_start)) %>
+      <%= date_field(:range, :start, :value => @date_range.date_start, :size => 8) %>
+    </td>
+    <td>
+      <%= label(:date,:stop,l(:date_stop)) %>
+      <%= date_field(:range, :stop, :value => @date_range.date_stop, :size => 8) %>
+    </td>
+    <td>
+      <%= submit_tag 'Выбрать', class: 'btn' %>
+    </td>
+    </tr>
+    </table>
+    </form>
+    <% end %>
+  </div>
+</fieldset>
+
+
+<p><b> Среднее время подписи задачи</b> </p>
+<p><%= avg_assigment(@stat_for_avg_values) %> часа</p>
+
+<p> <b>Среднее время решения задачи</b> </p>
+<p><%= avg_closed(@stat_for_avg_values)%> часа</p>
+
+
+<% for group in @long_running_tickets %>
+<h3 style="text-align: center;"> <%= group[0] %> </h3>
+<div class="autoscroll">
+  <table class="list stat-report issues">
+    <thead>
+      <tr>
+        <th>Ссылка на задачу</th>
+        <th>Владалец</th>
+        <th> Задача ведется </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% for ticket in group[1] %>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td style="text-align: left"><%=link_to ticket["title"], 'https://ncs.vgg.ru/tickets/'+ticket["id"].to_s, :target => "_blank"%></td>
+          <td><%= ticket["owner"] %></td>
+          <td><%= running_of_ticket(ticket) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% end %>

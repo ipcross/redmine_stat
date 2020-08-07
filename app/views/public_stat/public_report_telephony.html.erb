@@ -1,0 +1,32 @@
+<h2><%= l(:label_menu_name) %><%= l(:label_report_telephony) %></h2>
+
+<div id="forum-tabs" class="unico-tabs">
+  <ul class="unico-tabs__caption">
+    <li class="<%= 'active' if session[:telephony_category] == 'queue' %>">
+      <%= link_to 'Оценка разговоров', public_report_telephony_public_stat_index_path(:telephony_category => 'queue')  %>
+    </li>
+    <li class="<%= 'active' if session[:telephony_category] == 'stat' %>">
+      <%= link_to 'Статистика по телефонии', public_report_telephony_public_stat_index_path(:telephony_category => 'stat')  %>
+    </li>
+    <li class="<%= 'active' if session[:telephony_category] == 'control' %>">
+      <%= link_to 'Детальная суточная статистика', public_report_telephony_public_stat_index_path(:telephony_category => 'control')  %>
+    </li>
+    <li class="<%= 'active' if session[:telephony_category] == 'qstat' %>">
+      <%= link_to 'Отчет очереди', public_report_telephony_public_stat_index_path(:telephony_category => 'qstat')  %>
+    </li>
+    <li class="<%= 'active' if session[:telephony_category] == 'forum_avg' %>">
+      <%= link_to 'Данные по форуму', public_report_telephony_public_stat_index_path(:telephony_category => 'forum_avg')  %>
+    </li>
+  </ul>
+  <div class="unico-tabs__content active">
+    <%= render template: "public_stat/_telephony_#{session[:telephony_category]}" %>
+  </div>
+</div>
+
+<% reset_cycle %>
+
+<% content_for :header_tags do %>
+    <%= javascript_include_tag :stat, :plugin => 'public_stat' %>
+    <%= stylesheet_link_tag :stat, :plugin => 'public_stat' %>
+    <%= robot_exclusion_tag %>
+<% end %>

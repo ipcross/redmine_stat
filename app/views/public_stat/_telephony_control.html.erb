@@ -1,0 +1,64 @@
+<fieldset id="filters" class="collapsible collapsed">
+  <legend onclick="toggleFieldset(this);"><%= l(:label_filter_plural) %></legend>
+  <div class="row-fluid">
+    <%= form_tag public_report_telephony_public_stat_index_path, method: :get do%>
+     <%= hidden_field_tag :telephony_category , 'control' %>
+    <table>
+    <tr>
+      <%= label(:date,:start,l(:date_start)) %>
+      <%= date_field(:range, :start, :value => @date_range_for_cont.date_start, :size => 8) %>
+    </td>
+    <td>
+      <%= submit_tag 'Выбрать', class: 'btn' %>
+    </td>
+    </tr>
+    </table>
+    </form>
+    <% end %>
+  </div>
+</fieldset>
+
+<center>
+  <h3><%=l(:report_title)%>: <%= current_group_name %></h3>
+  <p><%=l(:report_range)%>: <%= @date_range_for_cont.date_start %>
+</center>
+
+<div class="autoscroll">
+ <% for group in @users_hash.keys %>
+ <center>
+ <b style="text-align: center;"> <%= group %> </b>
+ </center>
+  <br />
+  <table class="list stat-report issues">
+    <thead>
+      <tr>
+        <th><%=l(:label_users)%></th>
+        <% for i in 0..23%>
+          <th><%= i %> - <%= i + 1 %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% for user in @users_hash[group] %>
+          <tr class="<%= cycle("odd", "even") %>">
+            <td class="name"><%= link_to h(user.name), person_path(user) %></td>
+            <% for i in 0..23%>
+              <td><%= aggregate_calls_incoming(report_telephony_control_by_hour(i), user)[1] %> | <%= aggregate_calls_outcoming(report_telephony_control_by_hour(i), user)[1] %> </td>
+            <% end %>
+          </tr>  
+      <% end %>
+      <% if group == "Специалист первой линии" %>
+      <tr>
+       <td ><b>Пропущено</b></td>
+        <% for i in 0..23 %>
+          <td> <b><%= missed_calls(report_queue_log_by_time(i)) %></b> </td>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br />
+  <% end %>
+</div>
+
+<% reset_cycle %>

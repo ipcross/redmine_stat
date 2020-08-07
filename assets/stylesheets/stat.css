@@ -1,0 +1,70 @@
+table.stat-report th {
+  text-align: center;
+}
+
+.sidebar-users-container { text-align: center; }
+.sidebar-users {
+    display: inline-block;
+    padding-top: 20px;
+    text-align: right;
+    width: auto;
+}
+.sidebar-users label { width: auto; }
+
+.unico-tabs {  margin: 0 0 30px;  }
+
+.unico-tabs__caption {
+    height: 28px;
+    line-height: 25px;
+    list-style: none;
+    border: 1px solid #ddd;
+    background: whiteSmoke;
+    margin: 0;
+    padding: 0;
+}
+
+.unico-tabs__content {
+    display: none;
+    border: 1px solid #ddd;
+    border-width: 0 1px 1px;
+    padding: 5px;
+}
+
+.unico-tabs__content.active {
+    display: block;
+}
+
+.unico-tabs__caption li {
+    float: left;
+    display: inline;
+    margin: 0 1px -1px 0;
+    padding: 0 13px 1px;
+    color: #777;
+    cursor: pointer;
+    background: #F9F9F9;
+    border: 1px solid #E4E4E4;
+    border-bottom: 1px solid #F9F9F9;
+    position: relative;
+}
+
+.unico-tabs__caption .active {
+    color: #333333;
+    font-weight: bold;
+    background: white;
+    padding: 0 13px 2px;
+    border: 1px solid #ddd;
+    border-bottom: 1px solid white;
+}
+
+.unico-tabs__caption li a {
+    color: #777;
+}
+
+.unico-tabs__caption .active a {
+    color: #333333;
+}
+
+.unico-tabs__caption .active a:hover {
+    color: #4183c4;
+    text-decoration: none;
+}

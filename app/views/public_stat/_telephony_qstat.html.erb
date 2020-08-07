@@ -1,0 +1,82 @@
+<fieldset id="filters" class="collapsible collapsed">
+  <legend onclick="toggleFieldset(this);"><%= l(:label_filter_plural) %></legend>
+  <div class="row-fluid">
+    <%= form_tag public_report_telephony_public_stat_index_path, method: :get do%>
+     <%= hidden_field_tag :telephony_category , 'qstat' %>
+    <table>
+    <tr>
+    <td>
+      <%= label(:date,:start,l(:date_start)) %>
+      <%= date_field(:range, :start, :value => @date_range.date_start, :size => 8) %>
+    </td>
+    <td>
+      <%= label(:date,:stop,l(:date_stop)) %>
+      <%= date_field(:range, :stop, :value => @date_range.date_stop, :size => 8) %>
+    </td>
+    <td>
+      <%= submit_tag 'Выбрать', class: 'btn' %>
+    </td>
+    </tr>
+    </table>
+    </form>
+    <% end %>
+  </div>
+</fieldset>
+
+
+<br />
+<p > Среднее время в очереди в ожидании ответа: <%= @avg_connect %> </p>
+<p > Среднее время в очереди до сброса трубки: <%= @avg_abandon %> </p>
+<p > Количество абонентов, которые пробыли в очереди меньше 5 секунд: <%= @count_listened_balance %> </p>
+<br />
+
+<table>
+  <tr>
+  <td><h3 style="text-align: center;">ТОП звонков, ожидающих ответа </h3>
+ </td>
+  <tr>
+  <tr>
+    <td>
+<div class="autoscroll">
+  <table class="list stat-report issues">
+    <thead>
+      <tr>
+        <th>Дата звонка</th>
+        <th>Время в очереди до снятия трубки</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% for record in @connected_large %>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td><%= record[0].to_datetime.strftime("%B %d %Y %T") %></td>
+          <td><%= record[1] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+    </td>
+   <td>
+<div class="autoscroll">
+  <table class="list stat-report issues">
+    <thead>
+      <tr>
+        <th>Дата звонка</th>
+        <th>Время в очереди до сброса трубки</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% for record in @abandoned_large %>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td><%= record[0].to_datetime.strftime("%B %d %Y %T") %></td>
+          <td><%= record[1] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+  </td>
+ </tr>
+</table>

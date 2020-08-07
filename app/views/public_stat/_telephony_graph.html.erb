@@ -1,0 +1,84 @@
+<script type="text/javascript" charset="utf-8">
+var set_highcharts_bar,set_highcharts_bar1;
+set_highcharts_bar = function() {
+  return $("#container_bar").highcharts({
+        chart: {
+            type: 'area'
+        },
+        title: {
+            text: "Итоговый график загрузки телефонии"
+        },
+        subtitle: {
+            text: "<%=l(:report_range)%>: <%= @date_range.date_start %> - <%= @date_range.date_stop %>"
+        },
+        xAxis: {
+            type: 'datetime',
+            title: {
+              text: 'Каждый час периода'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Суммарное количесво'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value;
+                }
+            }
+        },
+        tooltip: {
+            pointFormat: '{series.name} <b>{point.y:,.0f}</b>'
+        },
+        plotOptions: {
+            area: {
+                pointStart: <%=@date_range.date_start.beginning_of_day.to_i * 1000%>,
+                pointInterval: 3600 * 1000,
+                marker: {
+                    enabled: false,
+                    symbol: 'circle',
+                    radius: 2,
+                    states: {
+                        hover: {
+                            enabled: true
+                        }
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'Количество звонков в час',
+            data: <%=aggregate_calls_each_hour(@date_range.date_start.beginning_of_day.to_i,@date_range.date_stop.end_of_day.to_i)%>
+        }]
+  });
+};
+$(document).ready(set_highcharts_bar);
+document.addEventListener("page:change", set_highcharts_bar);
+</script>
+
+<fieldset id="filters" class="collapsible collapsed">
+  <legend onclick="toggleFieldset(this);"><%= l(:label_filter_plural) %></legend>
+  <div class="row-fluid">
+    <%= form_tag report_telephony_stat_reports_path, method: :get do%>
+     <%= hidden_field_tag :telephony_category , 'graph' %>
+    <table>
+    <tr>
+    <td>
+      <%= label(:date,:start,l(:date_start)) %>
+      <%= date_field(:range, :start, :value => @date_range.date_start, :size => 8) %>
+    </td>
+    <td>
+      <%= label(:date,:stop,l(:date_stop)) %>
+      <%= date_field(:range, :stop, :value => @date_range.date_stop, :size => 8) %>
+    </td>
+    <td>
+      <%= submit_tag 'Выбрать', class: 'btn' %>
+    </td>
+    </tr>
+    </table>
+    </form>
+    <% end %>
+  </div>
+</fieldset>
+
+<div id="container_bar" style="min-width: 610px; height: 400px; margin: 0 auto"></div>

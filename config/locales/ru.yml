@@ -1,0 +1,66 @@
+# Russian strings go here for Rails i18n
+ru:
+  label_menu_name: "Статистика: "
+  label_report_redmine: "Redmine"
+  label_report_forum: "Форум"
+  label_report_telephony: "Телефония"
+  label_report_debrief: "Опрос"
+  label_report_time_entries: "Трудозатраты"
+  label_no_data:  "Нет данных"
+  label_users:  "Сотрудник"
+  label_filter_plural:      "Фильтры"
+  label_groups:   "Группы"
+
+  label_debrief_title: "Список последних опросов с комментариями"
+  label_debrief_create_date: "Дата"
+  label_debrief_login: "Логин"
+  label_debrief_full_name: "ФИО"
+  label_debrief_value: "Оценка"
+  label_debrief_comment: "Комментарий"
+  label_debrief_ticket: "Задача"
+  label_debrief_internet: "инет"
+  label_debrief_iptv: "iptv"
+  label_debrief_support: "админ"
+  label_debrief_mount: "монтаж"
+  label_debrief_video: "видео"
+
+  label_table_tasks: "Задач"
+  label_table_tasks_period: "Задач за период"
+  label_table_created: "Создано"
+  label_table_assigned: "Назначено"
+  label_table_open: "Открыто"
+  label_table_close: "Закрыто"
+  label_table_overdue: "Просрочено"
+  label_table_comment_count: "Кол-во комментариев"
+  label_table_total_duration: "Общая продолжительность"
+  label_table_ownership_process: "Владения процессом"
+  label_table_closed_tasks: "Закрытых задач"
+  label_table_opened_tasks: "Незакрытых задач"
+  label_total_assigned: "Всего назн. и откр."
+  label_total: "Всего"
+  label_forum_id: "Форум ID"
+
+  label_table_numbers: "Номера пользователя"
+  label_duration_calls: "Длительность, мин."
+  label_count_calls: "Всего"
+  label_count_calls_incoming: "Входящие"
+  label_count_calls_outcoming: "Исходящие"
+  label_average_duration: "Средняя продолж., мин."
+
+  date_start: "Начало"
+  date_stop: "Конец"
+
+  report_title: "Отчет"
+  report_range: "Период"
+
+  project_module_unico_stat_module:  "Статистика компании"
+  permission_view_stat_report_redmine:    "Просмотр статистики Redmine"
+  permission_view_stat_report_forum:    "Просмотр статистики форума"
+  permission_view_stat_report_telephony:    "Просмотр статистики телефонии"
+  permission_view_stat_report_debrief:    "Просмотр статистики опроса"
+  permission_view_stat_report_time_entries:    "Просмотр статистики трудозатрат"
+  permission_view_stat_quality_detailed: "Просмотр оценок обращений по звонкам"
+
+  label_emergency_reason: 'Причина закрытия'
+  label_emergency_count: 'Кол-во закрытых задач'
+  label_emergency_drive_mnt: 'Кол-во выездов монтажников'

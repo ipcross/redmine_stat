@@ -1,0 +1,23 @@
+<h1 style="text-align: center;"> <%= @stat_users.detect{|user| user.phone == params[:dst] } %></h1>
+<br>
+
+ <table class="list stat-report issues">
+    <thead>
+      <tr>
+        <th>Дата звонка </th>
+        <th>Номер абонента</th>
+        <th>Ссылка на скачивание</th>
+        <th> Оценка </th>
+      </tr>
+    </thead>
+    <tbody>
+  <% for call in @details[params[:quality]] %>
+        <tr class="<%= cycle("odd", "even") %>">
+        <% a = call.date+4.hours %>
+          <td><%= a.strftime("%B %d %Y %T") %></td>
+          <td><%= call.source %></td>
+          <td><%=link_to call.callid, 'https://ats.vgg.ru/admin/config.php?display=cdr&action=download_audio&cdr_file='+call.callid, :target => "_blank" %></td>
+          <td> <%= call.quality %> </td>
+      <% end %>
+    </tbody>
+  </table>

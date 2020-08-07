@@ -1,0 +1,3 @@
+require_dependency 'redmine_public_stat/patches/journal_patch'
+require_dependency 'redmine_public_stat/patches/issue_patch'
+require_dependency 'redmine_public_stat/hooks/views_layouts_hook'

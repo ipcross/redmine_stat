@@ -1,0 +1,35 @@
+# English strings go here for Rails i18n
+en:
+  label_menu_name: "Statistics: "
+  label_report_redmine: "Redmine"
+  label_report_forum: "Forum"
+  label_report_telephony: "Telephony"
+  label_no_data:  "Not data"
+  label_users:  "Users"
+  label_filter_plural:      "Filters"
+  label_groups:   "Groups"
+
+  label_table_tasks: "Tasks"
+  label_table_created: "Created"
+  label_table_assigned: "Assigned"
+  label_table_open: "Open"
+  label_table_close: "Close"
+  label_table_comment_count: "Count of comment"
+
+  label_table_numbers: "Numbers"
+  label_duration_calls: "Duration of calls"
+  label_count_calls: "Total calls"
+  label_count_calls_incoming: "Incoming calls"
+  label_count_calls_outcoming: "Outcoming calls"
+  label_average_duration: "Average duration"
+
+  date_start: "Begin"
+  date_stop: "End"
+
+  report_title: "Report"
+  report_range: "Period"
+
+  project_module_unico_stat_module:  "Statistics team"
+  permission_view_stat_report_redmine:    "View statistics of Redmine"
+  permission_view_stat_report_forum:    "View statistics of forum"
+  permission_view_stat_report_telephony:    "View statistics of telephony"
